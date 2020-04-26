@@ -24,8 +24,11 @@ const server = http.createServer((req, res) => {
            body.push(info);
        });
        req.on('end',() => {
-           activityList.push(Buffer.concat(body).toString());
-           console.log(activityList);
+            var parsedBody = Buffer.concat(body).toString();
+            console.log(parsedBody);
+            parsedBody = parsedBody.split('&'); 
+            activityList.push(parsedBody);
+            console.log(activityList);
        })
        res.write('<html>');
        res.write('<head><title>Activities Page</title></head>');
